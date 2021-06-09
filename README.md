@@ -1,34 +1,32 @@
-This mod provides an example Minecraft mod that can be referenced by other mod developers. Players may also use this mod to ensure that mods are being properly loaded.
+# Max Health Fix
+This is a Minecraft mod that will fix- [MC-17876](https://bugs.mojang.com/browse/MC-17876). This bug will cause a player's health to reset to the default value (20) when they log out. For example if a player has a helmet with +10 max health and logs out while having 25 health their health will be reset to 20.
 
-## Project Goals
-1) Provide build modules and related tools for mod developers.
-2) Document the various tools, apis, plugins, and modules used by mod developers.
-3) Test build tools through continuous integration.
+## Maven Dependency
+If you are using [Gradle](https://gradle.org) to manage your dependencies, add the following into your `build.gradle` file. Make sure to replace the version with the correct one. All versions can be viewed [here](https://maven.blamejared.com/net/darkhax/maxhealthfix/).
+```
+repositories {
 
- 
-## Player Information
-When loaded into a Minecraft environment the example mod will print it's name and version to the console. There are no additional requirements or functionality in game at this time.
+    maven { url 'https://maven.blamejared.com' }
+}
 
- 
-## Developer Information
-This mod is generated using the example mod template on GitHub. This template contains many modules and plugins which can be used to maximize the visibility and presence of your mod while reducing the amount of work required by the developer. This template is licensed under Creative Commons 0 and may be freely used by anyone to create new Minecraft mods or enhance their existing projects. Credit is appreciated but not required.
+dependencies {
 
-## Current features include
+    // Example: compile "net.darkhax.maxhealthfix:MaxHealthFix-1.16.5:1.0.1"
+    compile "net.darkhax.maxhealthfix:MaxHealthFix-MCVERSION:PUT_VERSION_HERE"
+}
+```
 
-    Appending build number from CI environment
-    Generating Sources and Javadoc artefacts
-    Common Java manifest properties
-    Autodeploy build artefacts to CurseForge
-    Post to Discord on CurseForge upload
-    Generate Forge mod, including mixins, access transformers, and other properties
-    Generate changelogs from git commit messages
-    Deploy build artefacts to maven
-    Minify JSON files at build time
-    Build time properties from secret environmental variables
-    Signing build artefacts with PGP signatures
-    In-game update/version checker
+## Jar Signing
 
- 
-## Future Updates
-This project will be updated with additional features, documentation, and optimizations as time permits. The immediate plans include additional documentation, Twitter integration, and Fabric support.
- 
+As of January 11th 2021 officially published builds will be signed. You can validate the integrity of these builds by comparing their signatures with the public fingerprints.
+
+| Hash   | Fingerprint                                                        |
+|--------|--------------------------------------------------------------------|
+| MD5    | `12F89108EF8DCC223D6723275E87208F`                                 |
+| SHA1   | `46D93AD2DC8ADED38A606D3C36A80CB33EFA69D1`                         |
+| SHA256 | `EBC4B1678BF90CDBDC4F01B18E6164394C10850BA6C4C748F0FA95F2CB083AE5` |
+
+## Sponsors
+<img src="https://nodecraft.com/assets/images/logo-dark.png" width="384" height="90">
+
+This project is sponsored by Nodecraft. Use code [Darkhax](https://nodecraft.com/r/darkhax) for 30% off!
