@@ -6,7 +6,7 @@ license="LGPL v2.1"
 [[mods]]
 modId="maxhealthfix"
 updateJSONURL="https://updates.blamejared.com/get?n=maxhealthfix&gv=1.16.5"
-version="${version}"
+version="${file.jarVersion}"
 displayName="${modName}"
 displayURL="${modHomepage}"
 credits="${modCredits}"
