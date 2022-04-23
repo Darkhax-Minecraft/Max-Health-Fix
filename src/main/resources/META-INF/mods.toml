@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[38,]"
+loaderVersion="[39,]"
 issueTrackerURL="https://github.com/Darkhax-Minecraft/Max-Health-Fix/issues"
 license="LGPL v2.1"
 
 [[mods]]
 modId="maxhealthfix"
-updateJSONURL="https://updates.blamejared.com/get?n=maxhealthfix&gv=1.18"
+updateJSONURL="https://updates.blamejared.com/get?n=maxhealthfix&gv=1.18.1"
 version="${file.jarVersion}"
 displayName="${modName}"
 displayURL="${modHomepage}"
