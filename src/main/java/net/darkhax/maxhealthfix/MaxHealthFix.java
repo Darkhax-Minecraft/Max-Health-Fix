@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
@@ -34,7 +34,7 @@ public class MaxHealthFix {
     public static final String TAG_NAME = "MaxHealthFixPrevAmount";
     
     private final Logger log = LogManager.getLogger("Max Health Fix");
-    private final List<ServerPlayerEntity> joiningPlayerQueue = new ArrayList<>();
+    private final List<ServerPlayer> joiningPlayerQueue = new ArrayList<>();
     
     public MaxHealthFix() {
         
@@ -55,9 +55,9 @@ public class MaxHealthFix {
      */
     private void onPlayerLogIn (PlayerLoggedInEvent event) {
         
-        if (event.getPlayer() instanceof ServerPlayerEntity) {
+        if (event.getPlayer() instanceof ServerPlayer) {
             
-            this.joiningPlayerQueue.add((ServerPlayerEntity) event.getPlayer());
+            this.joiningPlayerQueue.add((ServerPlayer) event.getPlayer());
         }
     }
     
@@ -67,9 +67,9 @@ public class MaxHealthFix {
      */
     private void onPlayerLogOut (PlayerLoggedOutEvent event) {
         
-        if (event.getPlayer() instanceof ServerPlayerEntity) {
+        if (event.getPlayer() instanceof ServerPlayer) {
             
-            final ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+            final ServerPlayer player = (ServerPlayer) event.getPlayer();
             player.getPersistentData().putFloat(TAG_NAME, event.getPlayer().getHealth());
         }
     }
@@ -85,17 +85,17 @@ public class MaxHealthFix {
         if (event.phase == Phase.END && !this.joiningPlayerQueue.isEmpty()) {
             
             // We use an iterator to process players so they can be easily removed.
-            final Iterator<ServerPlayerEntity> iter = this.joiningPlayerQueue.iterator();
+            final Iterator<ServerPlayer> iter = this.joiningPlayerQueue.iterator();
             
             while (iter.hasNext()) {
                 
                 // Get the player from the iterator and remove them instantly. We only ever
                 // want to process a player once for each time they log in.
-                final ServerPlayerEntity player = iter.next();
+                final ServerPlayer player = iter.next();
                 iter.remove();
                 
                 // Grab the persistent player data from Forge.
-                final CompoundNBT playerData = player.getPersistentData();
+                final CompoundTag playerData = player.getPersistentData();
                 
                 if (playerData != null && playerData.contains(TAG_NAME)) {
                     
