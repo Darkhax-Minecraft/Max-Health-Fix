@@ -7,6 +7,7 @@ logoBlur = false
 
 [[mods]]
 modId = "${mod_id}"
+displayTest="IGNORE_ALL_VERSION"
 updateJSONURL = "https://updates.blamejared.com/get?n=${mod_id}&gv=${minecraft_version}"
 version = "${file.jarVersion}"
 displayName = "${mod_name}"
@@ -16,4 +17,11 @@ authors = "${mod_author}"
 description = '''
 ${mod_description}
 '''
-itemIcon = "minecraft:bookshelf"
+itemIcon = "minecraft:golden_apple"
+
+[[dependencies.${ mod_id }]]
+modId = "forge"
+mandatory = true
+versionRange = "[41.1.0,)"
+ordering = "NONE"
+side = "BOTH"
