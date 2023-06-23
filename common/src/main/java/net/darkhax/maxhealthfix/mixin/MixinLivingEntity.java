@@ -24,9 +24,9 @@ public abstract class MixinLivingEntity {
     private Float actualHealth = null;
 
     /**
-     * The vanilla code will reset the entity health when the deserialized value exceeds {@link
-     * LivingEntity#getMaxHealth()}. This generally is not an issue, however when entities are initially loaded their
-     * max health attribute has not been properly initialized. This is the source of MC-17876.
+     * The vanilla code will reset the entity health when the deserialized value exceeds
+     * {@link LivingEntity#getMaxHealth()}. This generally is not an issue, however when entities are initially loaded
+     * their max health attribute has not been properly initialized. This is the source of MC-17876.
      * <p>
      * This mixin is used to circumvent this faulty logic by capturing the deserialized value early and storing it in
      * {@link #actualHealth}. This approach is favoured over attempting to initialize attributes early as there is no
@@ -55,9 +55,13 @@ public abstract class MixinLivingEntity {
     @Inject(method = "detectEquipmentUpdates()V", at = @At("RETURN"))
     private void maxhealthfix$detectEquipmentUpdates(CallbackInfo callback) {
 
-        if (actualHealth != null && actualHealth > 0 && actualHealth > this.getHealth()) {
+        if (actualHealth != null) {
 
-            this.setHealth(actualHealth);
+            if (actualHealth > 0 && actualHealth > this.getHealth()) {
+
+                this.setHealth(actualHealth);
+            }
+
             actualHealth = null;
         }
     }
