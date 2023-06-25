@@ -55,9 +55,13 @@ public abstract class MixinLivingEntity {
     @Inject(method = "detectEquipmentUpdates()V", at = @At("RETURN"))
     private void maxhealthfix$detectEquipmentUpdates(CallbackInfo callback) {
 
-        if (actualHealth != null && actualHealth > 0 && actualHealth > this.getHealth()) {
+        if (actualHealth != null) {
 
-            this.setHealth(actualHealth);
+            if (actualHealth > 0 && actualHealth > this.getHealth()) {
+
+                this.setHealth(actualHealth);
+            }
+
             actualHealth = null;
         }
     }
