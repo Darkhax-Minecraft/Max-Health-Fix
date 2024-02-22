@@ -1,5 +1,6 @@
 package net.darkhax.maxhealthfix.mixin;
 
+import net.darkhax.maxhealthfix.IHealthFixable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,25 +13,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 
-@Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity {
+@Mixin(value = LivingEntity.class, priority = 9001)
+public abstract class MixinLivingEntity implements IHealthFixable {
 
     /**
-     * This float is used to temporarily hold the actual health of the entity while the entity data is being
-     * deserialized. A null value is used to indicate that the health does not need correcting.
+     * Temporarily holds the original health value of the entity.
      */
     @Unique
     @Nullable
     private Float actualHealth = null;
 
     /**
-     * The vanilla code will reset the entity health when the deserialized value exceeds
-     * {@link LivingEntity#getMaxHealth()}. This generally is not an issue, however when entities are initially loaded
-     * their max health attribute has not been properly initialized. This is the source of MC-17876.
-     * <p>
-     * This mixin is used to circumvent this faulty logic by capturing the deserialized value early and storing it in
-     * {@link #actualHealth}. This approach is favoured over attempting to initialize attributes early as there is no
-     * standard way to do this that would reasonably account for modded attribute sources.
+     * The vanilla code loads entity health before attributes and equipment have been loaded in. This leads to players
+     * with health over the default maximum being reset when they join the game. This is the source of MC-17876. This
+     * mixin attempts to solve this issue by capturing the health value before it is applied and applying it again at a
+     * later point.
      */
     @Inject(method = "readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("HEAD"))
     private void maxhealthfix$readAdditionalSaveData(CompoundTag tag, CallbackInfo callback) {
@@ -47,13 +44,11 @@ public abstract class MixinLivingEntity {
     }
 
     /**
-     * This mixin is used to apply the {@link #actualHealth} value after entity equipment has been deserialized and
-     * properly applied to the entity. This approach is favoured over directly setting the health during deserialization
-     * as it has less potential for de-syncs. An example scenario of concern would be a player saving their game and
-     * removing a mod that added the attribute, resulting in too much health.
+     * This mixin is used to apply the {@link #actualHealth} at the end of the first tick. This is done to give
+     * equipment and modded mechanics like baubles/curios a chance to load in.
      */
-    @Inject(method = "detectEquipmentUpdates()V", at = @At("RETURN"))
-    private void maxhealthfix$detectEquipmentUpdates(CallbackInfo callback) {
+    @Inject(method = "tick()V", at = @At("TAIL"))
+    private void maxhealthfix$tick(CallbackInfo callback) {
 
         if (actualHealth != null) {
 
@@ -64,6 +59,12 @@ public abstract class MixinLivingEntity {
 
             actualHealth = null;
         }
+    }
+
+    @Override
+    public void maxhealthfix$setRestorePoint(float restorePoint) {
+
+        this.actualHealth = restorePoint;
     }
 
     @Shadow
