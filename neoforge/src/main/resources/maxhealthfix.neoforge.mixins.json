@@ -1,9 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.darkhax.maxhealthfix.forge.mixin",
-  "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_18",
+  "package": "net.darkhax.maxhealthfix.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [],
   "server": [],
