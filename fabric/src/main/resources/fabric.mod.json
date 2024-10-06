@@ -20,8 +20,8 @@
     "icon": "logo_${mod_id}.png",
     "environment": "${mod_target_environment}",
     "entrypoints": {
-        "client": [
-            "net.darkhax.maxhealthfix.fabric.impl.FabricModClient"
+        "main": [
+            "net.darkhax.maxhealthfix.fabric.impl.FabricMod"
         ]
     },
     "mixins": [
