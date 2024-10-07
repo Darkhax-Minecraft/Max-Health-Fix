@@ -3,7 +3,9 @@
   "minVersion": "0.8",
   "package": "net.darkhax.maxhealthfix.neoforge.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "MixinPlayerList"
+  ],
   "client": [],
   "server": [],
   "injectors": {

@@ -1,13 +1,13 @@
-package net.darkhax.maxhealthfix.impl;
+package net.darkhax.maxhealthfix.forge.impl;
 
 import net.darkhax.maxhealthfix.common.impl.MaxHealthFixMod;
 import net.darkhax.maxhealthfix.common.impl.Constants;
-import net.neoforged.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 
 @Mod(Constants.MOD_ID)
-public class NeoForgeMod {
+public class ForgeMod {
 
-    public NeoForgeMod() {
+    public ForgeMod() {
         MaxHealthFixMod.getInstance().init();
     }
 }

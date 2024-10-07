@@ -4,7 +4,9 @@
   "package": "net.darkhax.maxhealthfix.forge.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_18",
-  "mixins": [],
+  "mixins": [
+    "MixinPlayerList"
+  ],
   "client": [],
   "server": [],
   "injectors": {
