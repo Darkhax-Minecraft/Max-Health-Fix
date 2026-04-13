@@ -5,6 +5,7 @@ import net.darkhax.maxhealthfix.common.impl.MaxHealthFixMod;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.storage.ValueInput;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,13 +35,11 @@ public abstract class MixinLivingEntity implements IHealthFixable {
      * to the default max health for the entity type. This is the source of MC-17876. This mixin sets a restore point
      * before the health is clamped allowing the health value to be restored at the end of the next tick.
      */
-    @Inject(method = "readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("HEAD"))
-    private void maxhealthfix$readAdditionalSaveData(CompoundTag tag, CallbackInfo callback) {
-        if (tag.contains("Health", Tag.TAG_ANY_NUMERIC)) {
-            final float savedHealth = tag.getFloat("Health");
-            if (savedHealth > getMaxHealth() && savedHealth > 0) {
-                this.maxhealthfix$setRestorePoint(savedHealth);
-            }
+    @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
+    private void maxhealthfix$readAdditionalSaveData(ValueInput input, CallbackInfo ci) {
+        final float savedHealth = input.getFloatOr("Health", -9999f);
+        if (savedHealth > 0 && savedHealth > getMaxHealth()) {
+            this.maxhealthfix$setRestorePoint(savedHealth);
         }
     }
 

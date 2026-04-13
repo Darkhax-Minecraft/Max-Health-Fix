@@ -1,0 +1,41 @@
+{
+  "mod": {
+    "name": "MaxHealthFix",
+    "group": "net.darkhax.maxhealthfix",
+    "authors": [
+      "Darkhax"
+    ],
+    "id": "maxhealthfix",
+    "license": "LGPL 2.1",
+    "description": "Fixes the infamous MC-17876 bug. This bug would cause players with above 20 health to be reset when the restart the game.",
+    "repo": "https://github.com/Darkhax-Minecraft/Max-Health-Fix",
+    "client": false
+  },
+  "curseforge": {
+    "slug": "max-health-fix",
+    "id": "492246"
+  },
+  "modrinth": {
+    "slug": "max-health-fix",
+    "id": "mH8wdmqr"
+  },
+  "dependencies": [
+    {
+      "name": "Prickle",
+      "type": "required",
+      "maven": {
+        "common": "net.darkhax.pricklemc:prickle-common-26.1.2:26.1.2.1",
+        "neoforge": "net.darkhax.pricklemc:prickle-neoforge-26.1.2:26.1.2.1",
+        "fabric": "net.darkhax.pricklemc:prickle-fabric-26.1.2:26.1.2.1"
+      },
+      "curseforge": {
+        "slug": "prickle",
+        "id": "1023259"
+      },
+      "modrinth": {
+        "slug": "prickle",
+        "id": "aaRl8GiW"
+      }
+    }
+  ]
+}

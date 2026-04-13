@@ -1,50 +1,36 @@
 modLoader = "javafml"
-loaderVersion = "${neoforge_loader_version_range}"
-license = "${mod_license}"
-issueTrackerURL="${mod_repo}/issues"
+license = "LGPL 2.1"
+issueTrackerURL = "https://github.com/Darkhax-Minecraft/Max-Health-Fix/issues"
 
 [[mods]]
-modId = "${mod_id}"
-version = "${version}"
-displayName = "${mod_name}"
-updateJSONURL = "https://updates.blamejared.com/get?n=${mod_id}&gv=${minecraft_version}&ml=${platform}"
-displayURL = "${curse_page}"
-logoFile="logo_${mod_id}.png"
+modId = "maxhealthfix"
+version = "26.1.2.0"
+displayName = "MaxHealthFix"
+updateJSONURL = "https://updates.blamejared.com/get?n=maxhealthfix&gv=26.1.2&ml=neoforge"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/max-health-fix"
+logoFile = "logo_maxhealthfix.png"
 logoBlur = false
-credits = "This project is made possible with Patreon support from players like you. Thank you! ${patreon_pledges}"
-authors = "${mod_author}"
-description = "${mod_description}"
+credits = "This project is made possible with Patreon support from players like you. Thank you! lothrazar, techsquirrel, Keyana , Darkosto, Tobias Ward, noobanidus"
+authors = "Darkhax"
+description = "Fixes the infamous MC-17876 bug. This bug would cause players with above 20 health to be reset when the restart the game."
 
 [[mixins]]
-config = "${mod_id}.mixins.json"
+config = "maxhealthfix.common.mixins.json"
 
 [[mixins]]
-config = "${mod_id}.neoforge.mixins.json"
+config = "maxhealthfix.neoforge.mixins.json"
 
-[[dependencies.${mod_id}]]
-modId = "neoforge"
-type = "required"
-versionRange = "[${neoforge_version},)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
+[[dependencies.maxhealthfix]]
 modId = "minecraft"
 type = "required"
-versionRange = "${minecraft_version_range}"
+versionRange = "26.1"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "bookshelf"
+[[dependencies.maxhealthfix]]
+modId = "neoforge"
 type = "required"
-versionRange = "${bookshelf_version_range}"
+versionRange = "[26.1.0.1-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "prickle"
-type = "required"
-versionRange = "${prickle_version_range}"
-ordering = "NONE"
-side = "BOTH"
