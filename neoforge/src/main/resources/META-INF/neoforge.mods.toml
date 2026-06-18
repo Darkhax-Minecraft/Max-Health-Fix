@@ -4,9 +4,9 @@ issueTrackerURL = "https://github.com/Darkhax-Minecraft/Max-Health-Fix/issues"
 
 [[mods]]
 modId = "maxhealthfix"
-version = "26.1.2.0"
+version = "26.2.0.0"
 displayName = "MaxHealthFix"
-updateJSONURL = "https://updates.blamejared.com/get?n=maxhealthfix&gv=26.1.2&ml=neoforge"
+updateJSONURL = "https://updates.blamejared.com/get?n=maxhealthfix&gv=26.2&ml=neoforge"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/max-health-fix"
 logoFile = "logo_maxhealthfix.png"
 logoBlur = false
@@ -23,14 +23,14 @@ config = "maxhealthfix.neoforge.mixins.json"
 [[dependencies.maxhealthfix]]
 modId = "minecraft"
 type = "required"
-versionRange = "26.1"
+versionRange = "26.2"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.maxhealthfix]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.0.1-beta,)"
+versionRange = "[26.2.0.1-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
